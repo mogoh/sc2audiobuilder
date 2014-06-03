@@ -7,12 +7,14 @@ Timer timer;
 bool initialized = false;
 SpanElement clock;
 ButtonElement playPauseButton;
+TextAreaElement outputTextArea;
 
 void main() {
     playPauseButton = querySelector("#playButton");
     playPauseButton.onClick.listen(start);
-    querySelector("#resetButton").onClick.listen(reset);
     clock = querySelector("#clock");
+    outputTextArea = querySelector("#output");
+    querySelector("#resetButton").onClick.listen(reset);
 }
 
 void reset(Event e) {
@@ -106,11 +108,12 @@ void pulse(Timer timer) {
 void play(SC2Event sC2Event) {
     String unit = sC2Event.unit;
     new AudioElement("./sounds/" + unit + ".ogg").play();
-
 }
 
 void println(String text) {
-    querySelector("#output").text += text + "\n";
+    outputTextArea.text += text + "\n";
+    //  Scroll down
+    outputTextArea.scrollTop = outputTextArea.scrollHeight;
 }
 
 void setTime() {
