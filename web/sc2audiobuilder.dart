@@ -75,7 +75,7 @@ void parse() {
 void run() {
     println("gl hf");
     new AudioElement("./sounds/glhf.ogg").play();
-    timer = new Timer.periodic(const Duration(milliseconds: 768), pulse);
+    timer = new Timer.periodic(const Duration(milliseconds: 720), pulse);
 }
 
 void pulse(Timer timer) {
