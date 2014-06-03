@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>StarCraft 2 Audiobuilder</title>
+    </head>
+    <body>
+    <h1>StarCraft 2 Audiobuilder</h1>
+    <button id="startButton">Start</button>
+    <button id="pauseButton">Pause</button>
+    <button id="resetButton">Reset</button>
+    <span> Time: </span> <span id="clock">00:00</span>
+
+        <br />
+    <textarea id="input" cols=100 rows=20>
+Füge hier deinen Build ein. Exemplarisch findest du einen Build unten.
+
+Ein Zeile eine Buildorder muss folgende Aufbau haben:
+Zahl(wird ignoriert) Auftrag Zeit(mm:ss)
+
+Beispiel ("#" muss dann natürlich weggelassen werden):
+#  6    Drone       00:01
+
+Zeilen die nicht diesem Schema entsprechen (wie zum Beispiel diese Erklärtext) werden ignoriert.
+
+Hier eine Beispiel-Build Order, exportiert aus http://sc2planner.com/ :
+
+8 Pool
+=====
+
+  6 - Drone         [00:01 - 00:18]
+  7 - Drone         [00:16 - 00:33]
+  8 - Spawning Pool [00:55 - 02:00]
+  7 - Drone         [01:06 - 01:23]
+  8 - Drone         [01:15 - 01:32]
+  9 - Overlord      [01:35 - 02:00]
+  9 - Zergling      [02:00 - 02:24]
+ 10 - Zergling      [02:00 - 02:24]
+ 11 - Zergling      [02:00 - 02:24]
+ 12 - Zergling      [02:16 - 02:40]
+ 13 - Zergling      [02:31 - 02:55]
+ 14 - Zergling      [02:46 - 03:10]
+ 15 - Zergling      [03:01 - 03:25]
+ 16 - Zergling      [03:16 - 03:40]
+ 17 - Zergling      [03:31 - 03:55]
+
+
+Features, die noch eingebaut werden sollen:
+  * Chronoboost
+  * Mehrere Ereignisse zusammenfassen
+  * Caching Soundfiles
+  * Regelmäßige Erinnerungen:
+    * Chronoboost
+    * MULE callen
+    * Creepspreadne
+    * Larva Spawnen
+    * Supplyblock
+    * Minimap
+  * Hübschere Textausgabe
+  * Hübscheres UI
+</textarea>
+        <br />
+    <textarea id="output" cols="100" rows="20"></textarea>
+
+    <script type="application/dart" src="sc2audiobuilder.dart"></script>
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>
