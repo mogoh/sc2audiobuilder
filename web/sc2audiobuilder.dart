@@ -6,10 +6,11 @@ int time = 0;
 Timer timer;
 bool initialized = false;
 SpanElement clock;
+ButtonElement playPauseButton;
 
 void main() {
-    querySelector("#startButton").onClick.listen(start);
-    querySelector("#pauseButton").onClick.listen(pause);
+    playPauseButton = querySelector("#playButton");
+    playPauseButton.onClick.listen(start);
     querySelector("#resetButton").onClick.listen(reset);
     clock = querySelector("#clock");
 }
@@ -25,21 +26,23 @@ void reset(Event e) {
     querySelector("#output").text = "";
 }
 
-void pause(Event e) {
-    if (initialized) {
+
+void start(Event e) {
+    if (!initialized) {
+        playPauseButton.text = "Pause";
+        parse();
+        initialized = true;
+        run();
+    } else {
         if (timer.isActive) {
+            playPauseButton.text = "Play";
             timer.cancel();
         } else {
+            playPauseButton.text = "Pause";
             timer = new Timer.periodic(const Duration(milliseconds: 768), pulse
                     );
         }
     }
-}
-
-void start(Event e) {
-    parse();
-    initialized = true;
-    run();
 }
 
 void parse() {
@@ -80,7 +83,8 @@ void run() {
 
 void pulse(Timer timer) {
     setTime();
-    if (sC2EventList.first.time <= time) {
+    //  Play Event, 2 seconds look ahead
+    if (sC2EventList.first.time <= time+2) {
         SC2Event event = sC2EventList.first;
         sC2EventList.removeAt(0);
 
