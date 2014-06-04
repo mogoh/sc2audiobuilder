@@ -6058,7 +6058,7 @@ var $$ = {};
           return H.ioore(stringTime, 1);
         seconds = H.Primitives_parseInt(stringTime[1], null, null);
         time = J.$add$ns(J.$mul$ns(minutes, 60), seconds);
-        if (C.JSString_methods.endsWith$1(line, "(chronoboosted)"))
+        if (C.JSString_methods.endsWith$1(C.JSString_methods.toLowerCase$0(line), "(chronoboosted)"))
           $.get$sC2EventList().push(new Q.SC2Event(time, "chronoboost"));
         $.get$sC2EventList().push(new Q.SC2Event(time, unit));
       }

@@ -78,7 +78,7 @@ void parse() {
             int seconds = int.parse(stringTime[1]);
             int time = minutes * 60 + seconds;
 
-            if (line.endsWith("(chronoboosted)")) {
+            if (line.toLowerCase().endsWith("(chronoboosted)")) {
                 sC2EventList.add(new SC2Event(time, "chronoboost"));
             }
 
