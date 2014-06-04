@@ -6,12 +6,15 @@ int time = 0;
 Timer timer;
 bool initialized = false;
 SpanElement clock;
+ButtonElement playPauseButton;
+TextAreaElement outputTextArea;
 
 void main() {
-    querySelector("#startButton").onClick.listen(start);
-    querySelector("#pauseButton").onClick.listen(pause);
-    querySelector("#resetButton").onClick.listen(reset);
+    playPauseButton = querySelector("#playButton");
+    playPauseButton.onClick.listen(start);
     clock = querySelector("#clock");
+    outputTextArea = querySelector("#output");
+    querySelector("#resetButton").onClick.listen(reset);
 }
 
 void reset(Event e) {
@@ -22,24 +25,27 @@ void reset(Event e) {
     setTime();
     sC2EventList = new List<SC2Event>();
     initialized = false;
+    playPauseButton.text = "Play";
     querySelector("#output").text = "";
 }
 
-void pause(Event e) {
-    if (initialized) {
+
+void start(Event e) {
+    if (!initialized) {
+        playPauseButton.text = "Pause";
+        parse();
+        initialized = true;
+        run();
+    } else {
         if (timer.isActive) {
+            playPauseButton.text = "Play";
             timer.cancel();
         } else {
+            playPauseButton.text = "Pause";
             timer = new Timer.periodic(const Duration(milliseconds: 768), pulse
                     );
         }
     }
-}
-
-void start(Event e) {
-    parse();
-    initialized = true;
-    run();
 }
 
 void parse() {
@@ -49,25 +55,34 @@ void parse() {
     List<String> lines = input.split("\n");
 
     for (String line in lines) {
-        //Tests if line is a build order line
+        //  Tests if line is a build order line
+        //  This RegExp is buggy but won't be fixed until dart is fixed.
+        //  https://code.google.com/p/dart/issues/detail?id=19193
+        //  https://stackoverflow.com/questions/24027524/why-does-dart-not-match-this-regex
         RegExp buildOrderLine = new RegExp(
-                r"^\s*\d+.*([a-zA-Z.:]+\s*)+[a-zA-Z.:].*\d\d\:\d\d.*");
+                r"^\s*\d+\s*\-?\s*([a-zA-Z.:\d]+\s*)+.*\d\d:\d\d.*");
         if (line.contains(buildOrderLine)) {
             String unit = line;
-            //get rid of supply number
+            //  get rid of supply number
             unit = unit.replaceFirst(new RegExp(r"^\s*\d+"), "");
+            //  Match order
             Match matchOrder = new RegExp(r"([a-zA-Z.:\d]+\s*)+[a-zA-Z.:\d]\s"
                     ).firstMatch(unit);
             unit = matchOrder.group(0).toLowerCase();
             unit = unit.replaceAll(new RegExp(r"[.:\s]"), "");
 
+            //  extract Time
             Match matchTime = new RegExp(r"\d?\d\:\d\d").firstMatch(line);
             List<String> stringTime = matchTime.group(0).split(":");
             int minutes = int.parse(stringTime[0]);
             int seconds = int.parse(stringTime[1]);
             int time = minutes * 60 + seconds;
 
-            sC2EventList.add(new SC2Event(time, "build", unit, 1));
+            if (line.endsWith("(chronoboosted)")) {
+                sC2EventList.add(new SC2Event(time, "chronoboost"));
+            }
+
+            sC2EventList.add(new SC2Event(time, unit));
         }
     }
 }
@@ -75,18 +90,29 @@ void parse() {
 void run() {
     println("gl hf");
     new AudioElement("./sounds/glhf.ogg").play();
-    timer = new Timer.periodic(const Duration(milliseconds: 768), pulse);
+    timer = new Timer.periodic(const Duration(milliseconds: 720), pulse);
 }
 
 void pulse(Timer timer) {
     setTime();
-    if (sC2EventList.first.time <= time) {
+    //  Check for empty list
+    if (sC2EventList.isEmpty) {
+        timer.cancel();
+
+        new Timer(const Duration(seconds: 2), () {
+            println("gg");
+            new AudioElement("./sounds/gg.ogg").play();
+        });
+    }
+    //  Play Event, 2 seconds look ahead
+    else if (sC2EventList.first.time <= time+2) {
         SC2Event event = sC2EventList.first;
         sC2EventList.removeAt(0);
 
         println(event.time.toString() + " " + event.unit);
         play(event);
 
+        //  Check for empty list
         if (sC2EventList.isEmpty) {
             timer.cancel();
 
@@ -102,11 +128,12 @@ void pulse(Timer timer) {
 void play(SC2Event sC2Event) {
     String unit = sC2Event.unit;
     new AudioElement("./sounds/" + unit + ".ogg").play();
-
 }
 
 void println(String text) {
-    querySelector("#output").text += text + "\n";
+    outputTextArea.text += text + "\n";
+    //  Scroll down
+    outputTextArea.scrollTop = outputTextArea.scrollHeight;
 }
 
 void setTime() {
@@ -123,10 +150,7 @@ void setTime() {
 
 class SC2Event {
     int time;
-    //maybe unnessecary
-    String order;
     String unit;
-    int number;
 
-    SC2Event(this.time, this.order, this.unit, this.number);
+    SC2Event(this.time, this.unit);
 }

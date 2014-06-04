@@ -543,6 +543,14 @@ var $$ = {};
         throw H.wrapException(P.ArgumentError$(other));
       return receiver + other;
     },
+    endsWith$1: function(receiver, other) {
+      var otherLength, t1;
+      otherLength = other.length;
+      t1 = receiver.length;
+      if (otherLength > t1)
+        return false;
+      return other === this.substring$1(receiver, t1 - otherLength);
+    },
     replaceFirst$2: function(receiver, from, to) {
       return H.stringReplaceFirstUnchecked(receiver, from, to);
     },
@@ -5983,13 +5991,14 @@ var $$ = {};
 ["", "sc2audiobuilder.dart", , Q, {
   "^": "",
   main: [function() {
-    var t1 = J.get$onClick$x(document.querySelector("#startButton"));
+    var t1 = document.querySelector("#playButton");
+    $.playPauseButton = t1;
+    t1 = J.get$onClick$x(t1);
     H.setRuntimeTypeInfo(new W._EventStreamSubscription(0, t1._target, t1._eventType, W._wrapZone(Q.start$closure()), t1._useCapture), [H.getTypeArgumentByIndex(t1, 0)])._tryResume$0();
-    t1 = J.get$onClick$x(document.querySelector("#pauseButton"));
-    H.setRuntimeTypeInfo(new W._EventStreamSubscription(0, t1._target, t1._eventType, W._wrapZone(Q.pause$closure()), t1._useCapture), [H.getTypeArgumentByIndex(t1, 0)])._tryResume$0();
+    $.clock = document.querySelector("#clock");
+    $.outputTextArea = document.querySelector("#output");
     t1 = J.get$onClick$x(document.querySelector("#resetButton"));
     H.setRuntimeTypeInfo(new W._EventStreamSubscription(0, t1._target, t1._eventType, W._wrapZone(Q.reset$closure()), t1._useCapture), [H.getTypeArgumentByIndex(t1, 0)])._tryResume$0();
-    $.clock = document.querySelector("#clock");
   }, "call$0", "main$closure", 0, 0, 2],
   reset: [function(e) {
     var t1 = $.timer;
@@ -5999,29 +6008,30 @@ var $$ = {};
     Q.setTime();
     $.sC2EventList = H.setRuntimeTypeInfo([], [Q.SC2Event]);
     $.initialized = false;
+    $.playPauseButton.textContent = "Play";
     document.querySelector("#output").textContent = "";
   }, "call$1", "reset$closure", 2, 0, 7],
-  pause: [function(e) {
-    var t1;
-    if ($.initialized) {
-      t1 = $.timer;
-      if (t1._handle != null)
-        t1.cancel$0();
-      else
-        $.timer = P.Timer_Timer$periodic(C.Duration_768000, Q.pulse$closure());
-    }
-  }, "call$1", "pause$closure", 2, 0, 7],
   start: [function(e) {
-    var t1, t2;
-    Q.parse();
-    $.initialized = true;
-    t1 = document.querySelector("#output");
-    t2 = t1.textContent;
-    if (typeof t2 !== "string")
-      return t2.$add();
-    t1.textContent = t2 + "gl hf\n";
-    W.AudioElement_AudioElement("./sounds/glhf.ogg").play();
-    $.timer = P.Timer_Timer$periodic(C.Duration_768000, Q.pulse$closure());
+    var t1, t2, t3;
+    if (!$.initialized) {
+      $.playPauseButton.textContent = "Pause";
+      Q.parse();
+      $.initialized = true;
+      Q.println("gl hf");
+      W.AudioElement_AudioElement("./sounds/glhf.ogg").play();
+      $.timer = P.Timer_Timer$periodic(C.Duration_720000, Q.pulse$closure());
+    } else {
+      t1 = $.timer;
+      t2 = t1._handle;
+      t3 = $.playPauseButton;
+      if (t2 != null) {
+        t3.textContent = "Play";
+        t1.cancel$0();
+      } else {
+        t3.textContent = "Pause";
+        $.timer = P.Timer_Timer$periodic(C.Duration_768000, Q.pulse$closure());
+      }
+    }
   }, "call$1", "start$closure", 2, 0, 7],
   parse: function() {
     var lines, t1, line, t2, unit, stringTime, minutes, seconds, time;
@@ -6029,7 +6039,7 @@ var $$ = {};
     for (t1 = new H.ListIterator(lines, lines.length, 0, null); t1.moveNext$0();) {
       line = t1._current;
       t2 = J.getInterceptor$asx(line);
-      if (t2.contains$1(line, new H.JSSyntaxRegExp("^\\s*\\d+.*([a-zA-Z.:]+\\s*)+[a-zA-Z.:].*\\d\\d\\:\\d\\d.*", H.JSSyntaxRegExp_makeNative("^\\s*\\d+.*([a-zA-Z.:]+\\s*)+[a-zA-Z.:].*\\d\\d\\:\\d\\d.*", false, true, false), null, null)) === true) {
+      if (t2.contains$1(line, new H.JSSyntaxRegExp("^\\s*\\d+\\s*\\-?\\s*([a-zA-Z.:\\d]+\\s*)+.*\\d\\d:\\d\\d.*", H.JSSyntaxRegExp_makeNative("^\\s*\\d+\\s*\\-?\\s*([a-zA-Z.:\\d]+\\s*)+.*\\d\\d:\\d\\d.*", false, true, false), null, null)) === true) {
         unit = t2.replaceFirst$2(line, new H.JSSyntaxRegExp("^\\s*\\d+", H.JSSyntaxRegExp_makeNative("^\\s*\\d+", false, true, false), null, null), "");
         t2 = new H.JSSyntaxRegExp("([a-zA-Z.:\\d]+\\s*)+[a-zA-Z.:\\d]\\s", H.JSSyntaxRegExp_makeNative("([a-zA-Z.:\\d]+\\s*)+[a-zA-Z.:\\d]\\s", false, true, false), null, null).firstMatch$1(unit)._match;
         if (0 >= t2.length)
@@ -6048,14 +6058,20 @@ var $$ = {};
           return H.ioore(stringTime, 1);
         seconds = H.Primitives_parseInt(stringTime[1], null, null);
         time = J.$add$ns(J.$mul$ns(minutes, 60), seconds);
-        $.get$sC2EventList().push(new Q.SC2Event(time, "build", unit, 1));
+        if (C.JSString_methods.endsWith$1(line, "(chronoboosted)"))
+          $.get$sC2EventList().push(new Q.SC2Event(time, "chronoboost"));
+        $.get$sC2EventList().push(new Q.SC2Event(time, unit));
       }
     }
   },
   pulse: [function(timer) {
-    var $event, t1, t2, t3, t4;
+    var t1, $event;
     Q.setTime();
-    if (J.$le$n(J.get$first$ax($.get$sC2EventList()).time, $.time)) {
+    t1 = $.get$sC2EventList();
+    if (t1.length === 0) {
+      timer.cancel$0();
+      P.Timer_Timer(C.Duration_2000000, new Q.pulse_closure());
+    } else if (J.$le$n(J.get$first$ax(t1).time, $.time + 2)) {
       $event = J.get$first$ax($.get$sC2EventList());
       t1 = $.get$sC2EventList();
       t1.toString;
@@ -6065,21 +6081,26 @@ var $$ = {};
         H.throwExpression(P.UnsupportedError$("removeAt"));
       t1.splice(0, 1)[0];
       t1 = $event.unit;
-      t2 = J.toString$0($event.time) + " " + t1;
-      t3 = document.querySelector("#output");
-      t4 = t3.textContent;
-      t2 += "\n";
-      if (typeof t4 !== "string")
-        return t4.$add();
-      t3.textContent = t4 + t2;
+      Q.println(J.toString$0($event.time) + " " + t1);
       W.AudioElement_AudioElement("./sounds/" + t1 + ".ogg").play();
       if ($.get$sC2EventList().length === 0) {
         timer.cancel$0();
-        P.Timer_Timer(C.Duration_2000000, new Q.pulse_closure());
+        P.Timer_Timer(C.Duration_2000000, new Q.pulse_closure0());
       }
     }
     $.time = $.time + 1;
   }, "call$1", "pulse$closure", 2, 0, 8],
+  println: function(text) {
+    var t1, t2, t3;
+    t1 = $.outputTextArea;
+    t2 = t1.textContent;
+    t3 = text + "\n";
+    if (typeof t2 !== "string")
+      return t2.$add();
+    t1.textContent = t2 + t3;
+    t3 = $.outputTextArea;
+    t3.scrollTop = t3.scrollHeight;
+  },
   setTime: function() {
     var seconds, minutes;
     seconds = C.JSInt_methods.toString$0(C.JSInt_methods.$mod($.time, 60));
@@ -6093,17 +6114,19 @@ var $$ = {};
   pulse_closure: {
     "^": "Closure:9;",
     call$0: function() {
-      var t1, t2;
-      t1 = document.querySelector("#output");
-      t2 = t1.textContent;
-      if (typeof t2 !== "string")
-        return t2.$add();
-      t1.textContent = t2 + "gg\n";
+      Q.println("gg");
+      W.AudioElement_AudioElement("./sounds/gg.ogg").play();
+    }
+  },
+  pulse_closure0: {
+    "^": "Closure:9;",
+    call$0: function() {
+      Q.println("gg");
       W.AudioElement_AudioElement("./sounds/gg.ogg").play();
     }
   },
   SC2Event: {
-    "^": "Object;time,order,unit,number"
+    "^": "Object;time,unit"
   }
 },
 1],
@@ -6313,6 +6336,7 @@ C.C_OutOfMemoryError = new P.OutOfMemoryError();
 C.C__RootZone = new P._RootZone();
 C.Duration_0 = new P.Duration(0);
 C.Duration_2000000 = new P.Duration(2000000);
+C.Duration_720000 = new P.Duration(720000);
 C.Duration_768000 = new P.Duration(768000);
 C.EventStreamProvider_click = new W.EventStreamProvider("click");
 C.JS_CONST_0 = function(hooks) {
@@ -6470,6 +6494,8 @@ $.time = 0;
 $.timer = null;
 $.initialized = false;
 $.clock = null;
+$.playPauseButton = null;
+$.outputTextArea = null;
 Isolate.$lazy($, "globalThis", "globalThis", "get$globalThis", function() {
   return function() {
     return this;
