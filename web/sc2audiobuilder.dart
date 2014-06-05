@@ -8,6 +8,8 @@ bool initialized = false;
 SpanElement clock;
 ButtonElement playPauseButton;
 TextAreaElement outputTextArea;
+TextAreaElement inputTextArea;
+bool inputClicked = false;
 
 void main() {
     playPauseButton = querySelector("#playButton");
@@ -15,6 +17,15 @@ void main() {
     clock = querySelector("#clock");
     outputTextArea = querySelector("#output");
     querySelector("#resetButton").onClick.listen(reset);
+    inputTextArea = querySelector("#input");
+    inputTextArea.onClick.listen(inputFirstClick);
+}
+
+void inputFirstClick(Event e) {
+    if (!inputClicked) {
+        inputTextArea.select();
+        inputClicked = true;
+    }
 }
 
 void reset(Event e) {
@@ -62,14 +73,14 @@ void parse() {
         RegExp buildOrderLine = new RegExp(
                 r"^\s*\d+\s*\-?\s*([a-zA-Z.:\d]+\s*)+.*\d\d:\d\d.*");
         if (line.contains(buildOrderLine)) {
-            String unit = line;
+            String order = line;
             //  get rid of supply number
-            unit = unit.replaceFirst(new RegExp(r"^\s*\d+"), "");
+            order = order.replaceFirst(new RegExp(r"^\s*\d+\s*\-?"), "");
             //  Match order
-            Match matchOrder = new RegExp(r"([a-zA-Z.:\d]+\s*)+[a-zA-Z.:\d]\s"
-                    ).firstMatch(unit);
-            unit = matchOrder.group(0).toLowerCase();
-            unit = unit.replaceAll(new RegExp(r"[-_.:\s]"), "");
+            Match matchOrder = new RegExp(r"([a-zA-Z.:\d]+\s*)+[a-zA-Z.:\d]*"
+                    ).firstMatch(order);
+            order = matchOrder.group(0);
+            order = order.trim();
 
             //  extract Time
             Match matchTime = new RegExp(r"\d?\d\:\d\d").firstMatch(line);
@@ -82,7 +93,7 @@ void parse() {
                 sC2EventList.add(new SC2Event(time, "chronoboost"));
             }
 
-            sC2EventList.add(new SC2Event(time, unit));
+            sC2EventList.add(new SC2Event(time, order));
         }
     }
 }
@@ -96,9 +107,8 @@ void pulse(Timer timer) {
     //  Check for empty list
     if (sC2EventList.isEmpty) {
         timer.cancel();
-    }
-    //  Play Event, 2 seconds look ahead
-    else if (sC2EventList.first.time <= time+2) {
+    } //  Play Event, 2 seconds look ahead
+    else if (sC2EventList.first.time <= time + 2) {
         SC2Event event = sC2EventList.first;
         sC2EventList.removeAt(0);
 
@@ -114,8 +124,11 @@ void pulse(Timer timer) {
 }
 
 void play(SC2Event sC2Event) {
-    String unit = sC2Event.unit;
-    new AudioElement("./sounds/" + unit + ".ogg").play();
+    String order = sC2Event.order;
+
+    order = order.toLowerCase();
+    order = order.replaceAll(new RegExp(r"[-_.:\s]"), "");
+    new AudioElement("./sounds/" + order + ".ogg").play();
 }
 
 void println(String text) {
@@ -127,15 +140,15 @@ void println(String text) {
 void printEvent(SC2Event sC2Event) {
     String seconds = (sC2Event.time % 60).toString();
     if (seconds.length == 1) {
-        seconds = "0"+seconds;
+        seconds = "0" + seconds;
     }
     String minutes = (sC2Event.time ~/ 60).toString();
     if (minutes.length == 1) {
-        minutes = "0"+minutes;
+        minutes = "0" + minutes;
     }
-    String time = minutes+":"+seconds;
+    String time = minutes + ":" + seconds;
 
-    outputTextArea.text += "["+time+"] "+ sC2Event.unit + "\n";
+    outputTextArea.text += "[" + time + "] " + sC2Event.order + "\n";
     //  Scroll down
     outputTextArea.scrollTop = outputTextArea.scrollHeight;
 }
@@ -144,18 +157,18 @@ void printEvent(SC2Event sC2Event) {
 void setTime() {
     String seconds = (time % 60).toString();
     if (seconds.length == 1) {
-        seconds = "0"+seconds;
+        seconds = "0" + seconds;
     }
     String minutes = (time ~/ 60).toString();
     if (minutes.length == 1) {
-        minutes = "0"+minutes;
+        minutes = "0" + minutes;
     }
-    clock.text = minutes+":"+seconds;
+    clock.text = minutes + ":" + seconds;
 }
 
 class SC2Event {
     int time;
-    String unit;
+    String order;
 
-    SC2Event(this.time, this.unit);
+    SC2Event(this.time, this.order);
 }
