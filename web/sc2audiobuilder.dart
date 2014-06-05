@@ -109,7 +109,7 @@ void pulse(Timer timer) {
         SC2Event event = sC2EventList.first;
         sC2EventList.removeAt(0);
 
-        println(event.time.toString() + " " + event.unit);
+        printEvent(event);
         play(event);
 
         //  Check for empty list
@@ -135,6 +135,23 @@ void println(String text) {
     //  Scroll down
     outputTextArea.scrollTop = outputTextArea.scrollHeight;
 }
+
+void printEvent(SC2Event sC2Event) {
+    String seconds = (sC2Event.time % 60).toString();
+    if (seconds.length == 1) {
+        seconds = "0"+seconds;
+    }
+    String minutes = (sC2Event.time ~/ 60).toString();
+    if (minutes.length == 1) {
+        minutes = "0"+minutes;
+    }
+    String time = minutes+":"+seconds;
+
+    outputTextArea.text += "["+time+"] "+ sC2Event.unit + "\n";
+    //  Scroll down
+    outputTextArea.scrollTop = outputTextArea.scrollHeight;
+}
+
 
 void setTime() {
     String seconds = (time % 60).toString();
