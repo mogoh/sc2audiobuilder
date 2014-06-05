@@ -69,7 +69,7 @@ void parse() {
             Match matchOrder = new RegExp(r"([a-zA-Z.:\d]+\s*)+[a-zA-Z.:\d]\s"
                     ).firstMatch(unit);
             unit = matchOrder.group(0).toLowerCase();
-            unit = unit.replaceAll(new RegExp(r"[.:\s]"), "");
+            unit = unit.replaceAll(new RegExp(r"[-_.:\s]"), "");
 
             //  extract Time
             Match matchTime = new RegExp(r"\d?\d\:\d\d").firstMatch(line);
@@ -88,8 +88,6 @@ void parse() {
 }
 
 void run() {
-    println("gl hf");
-    new AudioElement("./sounds/glhf.ogg").play();
     timer = new Timer.periodic(const Duration(milliseconds: 720), pulse);
 }
 
@@ -98,11 +96,6 @@ void pulse(Timer timer) {
     //  Check for empty list
     if (sC2EventList.isEmpty) {
         timer.cancel();
-
-        new Timer(const Duration(seconds: 2), () {
-            println("gg");
-            new AudioElement("./sounds/gg.ogg").play();
-        });
     }
     //  Play Event, 2 seconds look ahead
     else if (sC2EventList.first.time <= time+2) {
@@ -115,11 +108,6 @@ void pulse(Timer timer) {
         //  Check for empty list
         if (sC2EventList.isEmpty) {
             timer.cancel();
-
-            new Timer(const Duration(seconds: 2), () {
-                println("gg");
-                new AudioElement("./sounds/gg.ogg").play();
-            });
         }
     }
     time += 1;
