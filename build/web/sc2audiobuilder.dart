@@ -40,7 +40,6 @@ void reset(Event e) {
     querySelector("#output").text = "";
 }
 
-
 void start(Event e) {
     if (!initialized) {
         playPauseButton.text = "Pause";
@@ -126,6 +125,27 @@ void parse() {
             }
         }
         sC2EventList.sort((e1, e2) => e1.time - e2.time);
+
+        //  Merge multiple events
+        for (int i = 0; i < sC2EventList.length; i += 1) {
+            int j = i+1;
+            if (sC2EventList.length == j) {
+                break;
+            }
+            while (sC2EventList[i].time >= sC2EventList[j].time-2) {
+                String e1 = sC2EventList[i].order.replaceAll(new RegExp(r"\s*"), "").toLowerCase();
+                String e2 = sC2EventList[j].order.replaceAll(new RegExp(r"\s*"), "").toLowerCase();
+                if (e1 == e2) {
+                    sC2EventList[i].times += 1;
+                    sC2EventList.removeAt(j);
+                } else {
+                    j += 1;
+                }
+                if (sC2EventList.length >= j) {
+                    break;
+                }
+            }
+        }
     }
 }
 
@@ -167,6 +187,16 @@ void play(SC2Event sC2Event) {
     order = order.toLowerCase();
     order = order.replaceAll(new RegExp(r"[-_.:\s]"), "");
     new AudioElement("./sounds/" + order + ".ogg").play();
+
+    if (sC2Event.times > 1 && sC2Event.times <= 24) {
+        new Timer(const Duration(milliseconds: 1500),(){
+            new AudioElement("./sounds/" + sC2Event.times.toString() + "times.ogg").play();
+        });
+    } else if (sC2Event.times > 1 && sC2Event.times > 24){
+        new Timer(const Duration(milliseconds: 1500),(){
+            new AudioElement("./sounds/manytimes.ogg").play();
+        });
+    }
 }
 
 void println(String text) {
@@ -186,11 +216,15 @@ void printEvent(SC2Event sC2Event) {
     }
     String time = minutes + ":" + seconds;
 
-    outputTextArea.text += "[" + time + "] " + sC2Event.order + "\n";
+    String times = "";
+    if (sC2Event.times > 1) {
+        times = " " + sC2Event.times.toString() + "x";
+    }
+
+    outputTextArea.text += "[" + time + "] " + sC2Event.order + times + "\n";
     //  Scroll down
     outputTextArea.scrollTop = outputTextArea.scrollHeight;
 }
-
 
 void setTime() {
     String seconds = (time % 60).toString();
@@ -207,6 +241,7 @@ void setTime() {
 class SC2Event {
     int time;
     String order;
+    int times;
 
-    SC2Event(this.time, this.order);
+    SC2Event(this.time, this.order, {this.times: 1});
 }
