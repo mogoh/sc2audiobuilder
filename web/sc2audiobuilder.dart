@@ -84,10 +84,7 @@ void parse() {
 
             //  extract Time
             Match matchTime = new RegExp(r"\d?\d\:\d\d").firstMatch(line);
-            List<String> stringTime = matchTime.group(0).split(":");
-            int minutes = int.parse(stringTime[0]);
-            int seconds = int.parse(stringTime[1]);
-            int time = minutes * 60 + seconds;
+            int time = parseTime(matchTime.group(0));
 
             if (line.toLowerCase().endsWith("(chronoboosted)")) {
                 sC2EventList.add(new SC2Event(time, "chronoboost"));
@@ -95,7 +92,48 @@ void parse() {
 
             sC2EventList.add(new SC2Event(time, order));
         }
+
+        //  Returning reminder.
+        if (line.toLowerCase().startsWith("reminder:")) {
+            String reminder;
+            String startString;
+            int start;
+            String everyString;
+            int every;
+
+            reminder = line.replaceFirst(new RegExp(r"^reminder:", caseSensitive: false), "");
+            reminder = reminder.replaceFirst(new RegExp(r"start:.*$", caseSensitive: false), "");
+            reminder = reminder.trim();
+
+            startString = line.replaceFirst(new RegExp(r"^.*start:", caseSensitive: false), "");
+            startString = startString.replaceFirst(new RegExp(r"every:.*$", caseSensitive: false), "");
+            startString = startString.trim();
+            start = parseTime(startString);
+
+            everyString = line.replaceFirst(new RegExp(r"^.*every:", caseSensitive: false), "");
+            everyString = everyString.trim();
+            every = parseTime(everyString);
+            if (start <= 0) {
+                start = 0;
+            }
+            if (every <= 0) {
+                every += 1;
+            }
+
+            while (start < 10000) {
+                sC2EventList.add(new SC2Event(start, reminder));
+                start += every;
+            }
+        }
+        sC2EventList.sort((e1, e2) => e1.time - e2.time);
     }
+}
+
+int parseTime(String time) {
+    List<String> stringTime = time.split(":");
+    int minutes = int.parse(stringTime[0]);
+    int seconds = int.parse(stringTime[1]);
+    return minutes * 60 + seconds;
 }
 
 void run() {
