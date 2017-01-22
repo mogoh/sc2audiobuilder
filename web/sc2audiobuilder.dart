@@ -193,16 +193,16 @@ void play(SC2Event sC2Event) {
 
     order = order.toLowerCase();
     order = order.replaceAll(new RegExp(r"[-_.:\s]"), "");
-    new AudioElement("./sounds/" + order + ".ogg").play();
+    new AudioElement("./sounds/" + order + ".mp3").play();
 
     if (sC2Event.times > 1 && sC2Event.times <= 24) {
         new Timer(const Duration(milliseconds: 1500), () {
             new AudioElement("./sounds/" + sC2Event.times.toString() +
-                    "times.ogg").play();
+                    "times.mp3").play();
         });
     } else if (sC2Event.times > 1 && sC2Event.times > 24) {
         new Timer(const Duration(milliseconds: 1500), () {
-            new AudioElement("./sounds/manytimes.ogg").play();
+            new AudioElement("./sounds/manytimes.mp3").play();
         });
     }
 }
