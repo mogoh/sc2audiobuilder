@@ -1,4 +1,5 @@
-name: sc2audiobuilder
+name: sc2_audiobuilder
+version: 1.0.0
 description: StarCraft 2 Audiobuilder
 dependencies:
   browser: any
