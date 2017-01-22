@@ -21,25 +21,6 @@ void main() {
     inputTextArea.onClick.listen(inputFirstClick);
 }
 
-void inputFirstClick(Event e) {
-    if (!inputClicked) {
-        inputTextArea.select();
-        inputClicked = true;
-    }
-}
-
-void reset(Event e) {
-    if (timer != null) {
-        timer.cancel();
-    }
-    time = 0;
-    setTime();
-    sC2EventList = new List<SC2Event>();
-    initialized = false;
-    playPauseButton.text = "Play";
-    querySelector("#output").text = "";
-}
-
 void start(Event e) {
     if (!initialized) {
         playPauseButton.text = "Pause";
@@ -55,6 +36,25 @@ void start(Event e) {
             timer = new Timer.periodic(const Duration(milliseconds: 768), pulse
                     );
         }
+    }
+}
+
+void reset(Event e) {
+    if (timer != null) {
+        timer.cancel();
+    }
+    time = 0;
+    setTime();
+    sC2EventList = new List<SC2Event>();
+    initialized = false;
+    playPauseButton.text = "Play";
+    querySelector("#output").text = "";
+}
+
+void inputFirstClick(Event e) {
+    if (!inputClicked) {
+        inputTextArea.select();
+        inputClicked = true;
     }
 }
 
@@ -100,16 +100,21 @@ void parse() {
             String everyString;
             int every;
 
-            reminder = line.replaceFirst(new RegExp(r"^reminder:", caseSensitive: false), "");
-            reminder = reminder.replaceFirst(new RegExp(r"start:.*$", caseSensitive: false), "");
+            reminder = line.replaceFirst(new RegExp(r"^reminder:",
+                    caseSensitive: false), "");
+            reminder = reminder.replaceFirst(new RegExp(r"start:.*$",
+                    caseSensitive: false), "");
             reminder = reminder.trim();
 
-            startString = line.replaceFirst(new RegExp(r"^.*start:", caseSensitive: false), "");
-            startString = startString.replaceFirst(new RegExp(r"every:.*$", caseSensitive: false), "");
+            startString = line.replaceFirst(new RegExp(r"^.*start:",
+                    caseSensitive: false), "");
+            startString = startString.replaceFirst(new RegExp(r"every:.*$",
+                    caseSensitive: false), "");
             startString = startString.trim();
             start = parseTime(startString);
 
-            everyString = line.replaceFirst(new RegExp(r"^.*every:", caseSensitive: false), "");
+            everyString = line.replaceFirst(new RegExp(r"^.*every:",
+                    caseSensitive: false), "");
             everyString = everyString.trim();
             every = parseTime(everyString);
             if (start <= 0) {
@@ -128,13 +133,15 @@ void parse() {
 
         //  Merge multiple events
         for (int i = 0; i < sC2EventList.length; i += 1) {
-            int j = i+1;
+            int j = i + 1;
             if (sC2EventList.length == j) {
                 break;
             }
-            while (sC2EventList[i].time >= sC2EventList[j].time-2) {
-                String e1 = sC2EventList[i].order.replaceAll(new RegExp(r"\s*"), "").toLowerCase();
-                String e2 = sC2EventList[j].order.replaceAll(new RegExp(r"\s*"), "").toLowerCase();
+            while (sC2EventList[i].time >= sC2EventList[j].time - 2) {
+                String e1 = sC2EventList[i].order.replaceAll(new RegExp(r"\s*"),
+                        "").toLowerCase();
+                String e2 = sC2EventList[j].order.replaceAll(new RegExp(r"\s*"),
+                        "").toLowerCase();
                 if (e1 == e2) {
                     sC2EventList[i].times += 1;
                     sC2EventList.removeAt(j);
@@ -189,11 +196,12 @@ void play(SC2Event sC2Event) {
     new AudioElement("./sounds/" + order + ".ogg").play();
 
     if (sC2Event.times > 1 && sC2Event.times <= 24) {
-        new Timer(const Duration(milliseconds: 1500),(){
-            new AudioElement("./sounds/" + sC2Event.times.toString() + "times.ogg").play();
+        new Timer(const Duration(milliseconds: 1500), () {
+            new AudioElement("./sounds/" + sC2Event.times.toString() +
+                    "times.ogg").play();
         });
-    } else if (sC2Event.times > 1 && sC2Event.times > 24){
-        new Timer(const Duration(milliseconds: 1500),(){
+    } else if (sC2Event.times > 1 && sC2Event.times > 24) {
+        new Timer(const Duration(milliseconds: 1500), () {
             new AudioElement("./sounds/manytimes.ogg").play();
         });
     }
@@ -216,6 +224,7 @@ void printEvent(SC2Event sC2Event) {
     }
     String time = minutes + ":" + seconds;
 
+    //  times an event occur
     String times = "";
     if (sC2Event.times > 1) {
         times = " " + sC2Event.times.toString() + "x";
