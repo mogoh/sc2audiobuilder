@@ -1,87 +1,92 @@
-1 x SCV Gas;put one SCV in gas
-2 x Gas SCV
-2 x Mineral SCV
-3 x Gas SCV
-3 x Mineral SCV
-Armory
-Banshee
-Barracks
-Battlecruiser
-Behemoth Reactor
-Building Armor
-Bunker
-Caduceus Reactor
+1 x SCV in Gas;put one SCV in Gas
+1 x SCV to Minerals;put one SCV back to Minerals
+2 x SCV in Gas;put two SCVs in Gas
+2 x SCV to Minerals;put two SCVs back to Minerals
+3 x SCV in Gas;put three SCVs in Gas
+3 x SCV to Minerals;put three SCVs back to Minerals
+Advanced Ballistics;Research Advanced Ballistics
+Armory;Build Armory
+Banshee;Build Banshee
+Barracks;Build Barracks
+Battlecruiser;Build Battlecruiser
+Behemoth Reactor;Research Behemoth Reactor
+Building Armor;Research Building Armor
+Bunker;Build Bunker
+Caduceus Reactor;Research Caduceus Reactor
 Calldown: Extra Supplies
 Calldown: MULE
-Cloaking Field
-Combat Shield
-Command Center
-Command Center in Base
-Concussive Shells
-Corvid Reactor
-Drilling Claws
-Durable Materials
-Engineering Bay
-Factory
-Fusion Core
-Gas SCV
-Ghost
-Ghost Academy
-Go out with SCV
-Gold Expansion
-Hellbat
-Hellbat in Reactor
-Hellion
-Hellion in Reactor
-Hi-Sec Auto Tracking
-Infantry Armor Level 1
-Infantry Armor Level 2
-Infantry Armor Level 3
-Infantry Weapons Level 1
-Infantry Weapons Level 2
-Infantry Weapons Level 3
-Infernal Pre-Igniter
-Marauder
-Marine
-Marine in Reactor
-Medivac
-Medivac in Reactor
-Mineral SCV
-Missile Turret
-Neosteel Frame
-Orbital Command
-Personal Cloaking
-Raven
-Reactor on Barracks
-Reactor on Factory
-Reactor on Starport
-Reaper
-Reaper in Reactor
-Refinery
-Return SCV
-SCV
+Cloaking Field;Research Cloaking Field
+Combat Shield;Research Combat Shield
+Command Center;Build Command Center
+Concussive Shells;Research Concussive Shells
+Corvid Reactor;Research Corvid Reactor
+Cyclone;Build Cyclone
+Drilling Claws;Research Drilling Claws
+Durable Materials;Research Durable Materials
+Engineering Bay;Build Engineering Bay
+Factory;Build Factory
+Fusion Core;Build Fusion Core
+Ghost Academy;Build Ghost Academy
+Ghost;Build Ghost
+Hellbat in Reactor;Build Hellbat in Reactor
+Hellbat;Build Hellbat
+Hellion in Reactor;Build Hellion in Reactor
+Hellion;Build Hellion
+Hi-Sec Auto Tracking;Research Hi-Sec Auto Tracking
+High Capacity Fuel Tanks;Research High Capacity Fuel Tanks
+Hyperflight Rotors;Research Hyperflight Rotors
+Infantry Armor Level 1;Research Infantry Armor Level 1
+Infantry Armor Level 2;Research Infantry Armor Level 2
+Infantry Armor Level 3;Research Infantry Armor Level 3
+Infantry Weapons Level 1;Research Infantry Weapons Level 1
+Infantry Weapons Level 2;Research Infantry Weapons Level 2
+Infantry Weapons Level 3;Research Infantry Weapons Level 3
+Infernal Pre-Igniter;Research Infernal Pre-Igniter
+Liberator;Build Liberator
+Mag-Field Accelerator;Research Mag-Field Accelerator
+Mag-Field Launchers;Research Mag-Field Launchers
+Marauder;Build Marauder
+Marine in Reactor;Build Marine in Reactor
+Marine;Build Marine
+Medivac in Reactor;Build Medivac in Reactor
+Medivac;Build Medivac
+Missile Turret;Build Missile Turret
+Neosteel Frame;Research Neosteel Frame
+Orbital Command;Build Orbital Command
+Personal Cloaking;Research Personal Cloaking
+Raven;Build Raven
+Reactor on Barracks;Build Reactor on Barracks
+Reactor on Factory;Build Reactor on Factory
+Reactor on Starport;Build Reactor on Starport
+Reaper in Reactor;Build Reaper in Reactor
+Reaper;Build Reaper
+Recalibrated Explosives;Research Recalibrated Explosives
+Refinery;Build Refinery
 Salvage Bunker
 Scanner Sweep
-Sensor Tower
-Ship Weapons Level 1
-Ship Weapons Level 2
-Ship Weapons Level 3
-Siege Tank
-Starport
-Stimpack
-Supply Depot
-Tech Lab on Barracks
-Tech Lab on Factory
-Tech Lab on Starport
-Thor
-Vehicle Weapons Level 1
-Vehicle Weapons Level 2
-Vehicle Weapons Level 3
-Vehicle and Ship Plating Level 1
-Vehicle and Ship Plating Level 2
-Vehicle and Ship Plating Level 3
-Viking
-Viking in Reactor
-Weapon Refit
-Widow Mine
-Widow Mine in Reactor
+SCV;Build SCV
+SCV in Gas;Put SCVs in Gas
+SCV to Minerals;Put SCVs back to Minerals
+Sensor Tower;Build Sensor Tower
+Ship Weapons Level 1;Research Ship Weapons Level 1
+Ship Weapons Level 2;Research Ship Weapons Level 2
+Ship Weapons Level 3;Research Ship Weapons Level 3
+Siege Tank;Build Siege Tank
+Starport;Build Starport
+Stimpack;Research Stimpack
+Supply Depot;Build Supply Depot
+Tech Lab on Barracks;Build Tech Lab on Barracks
+Tech Lab on Factory;Build Tech Lab on Factory
+Tech Lab on Starport;Build Tech Lab on Starport
+Thor;Build Thor
+Vehicle and Ship Plating Level 1;Research Vehicle and Ship Plating Level 1
+Vehicle and Ship Plating Level 2;Research Vehicle and Ship Plating Level 2
+Vehicle and Ship Plating Level 3;Research Vehicle and Ship Plating Level 3
+Vehicle Weapons Level 1;Research Vehicle Weapons Level 1
+Vehicle Weapons Level 2;Research Vehicle Weapons Level 2
+Vehicle Weapons Level 3;Research Vehicle Weapons Level 3
+Viking in Reactor;Build Viking in Reactor
+Viking;Build Viking
+Weapon Refit;Research Weapon Refit
+Widow Mine in Reactor;Build Widow Mine in Reactor
+Widow Mine;Build Widow Mine

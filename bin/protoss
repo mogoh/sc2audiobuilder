@@ -1,21 +1,25 @@
-2 x Gas Probe
-2 x Mineral Probe
-3 x Gas Probe
-3 x Mineral Probe
-Air Armor Level 1
-Air Armor Level 2
-Air Armor Level 3
-Air Weapons Level 1
-Air Weapons Level 2
-Air Weapons Level 3
-Anion Pulse-Crystals
-Archon from DT and DT
-Archon from DT and HT
-Archon from HT and HT
-Assimilator
-Blink
-Carrier
-Charge
+1 x Probe in Gas;put one Probe in Gas
+1 x Probe to Minerals;put one Probe back to Minerals
+2 x Probe in Gas;put two Probes in Gas
+2 x Probe to Minerals;put two Probes back to Minerals
+3 x Probe in Gas;put three Probes in Gas
+3 x Probe to Minerals;put three Probes back to Minerals
+Adept;Warp in Adept
+Air Armor Level 1;Research Air Armor Level 1
+Air Armor Level 2;Research Air Armor Level 2
+Air Armor Level 3;Research Air Armor Level 3
+Air Weapons Level 1;Research Air Weapons Level 1
+Air Weapons Level 2;Research Air Weapons Level 2
+Air Weapons Level 3;Research Air Weapons Level 3
+Anion Pulse-Crystals;Research Anion Pulse-Crystals
+Archon from DT and DT;Fuse Archon from two DTs
+Archon from DT and HT;Fuse Archon from DT and HT
+Archon from HT and HT;Fuse Archon from two HTs
+Archon;Fuse Archon
+Assimilator;Build Assimilator
+Blink;Research Blink
+Carrier;Build Carrier
+Charge;Research Charge
 Chrono Boost
 Chrono Boost Air Armor Level 1
 Chrono Boost Air Armor Level 2
@@ -30,7 +34,9 @@ Chrono Boost Carrier
 Chrono Boost Charge
 Chrono Boost Colossus
 Chrono Boost Cybernetics Core
+Chrono Boost Dark Shrine
 Chrono Boost Dark Templar
+Chrono Boost Disruptor
 Chrono Boost Extended Thermal Lance
 Chrono Boost Fleet Beacon
 Chrono Boost Forge
@@ -53,9 +59,11 @@ Chrono Boost Oracle
 Chrono Boost Phoenix
 Chrono Boost Probe
 Chrono Boost Psionic Storm
+Chrono Boost Resonating Glaives
 Chrono Boost Robotics Bay
 Chrono Boost Robotics Facility
 Chrono Boost Sentry
+Chrono Boost Shadow Stride
 Chrono Boost Shields Level 1
 Chrono Boost Shields Level 2
 Chrono Boost Shields Level 3
@@ -67,66 +75,62 @@ Chrono Boost Twilight Council
 Chrono Boost Void Ray
 Chrono Boost Warp Gate
 Chrono Boost Warp Gate Upgrade
-Chrono Boost Warp Prism
 Chrono Boost Warp in Dark Templar
 Chrono Boost Warp in High Templar
 Chrono Boost Warp in Sentry
 Chrono Boost Warp in Stalker
 Chrono Boost Warp in Zealot
+Chrono Boost Warp Prism
 Chrono Boost Zealot
-Colossus
-Cybernetics Core
-Dark Shrine
-Dark Templar
-Extended Thermal Lance
-Fleet Beacon
-Forge
-Gas Probe
-Gateway
-Go out with Probe
-Gravitic Boosters
-Gravitic Drive
-Graviton Catapult
-Ground Armor Level 1
-Ground Armor Level 2
-Ground Armor Level 3
-Ground Weapons Level 1
-Ground Weapons Level 2
-Ground Weapons Level 3
-High Templar
-Immortal
-Interceptor
-Mineral Probe
-Mothership
-Mothership Core
-Nexus
-Nexus in Base
-Observer
-Oracle
-Phoenix
-Photon Cannon
-Probe
-Psionic Storm
-Pylon
+Colossus;Warp in Gas Probe
+Cybernetics Core;Build Cybernetics Core
+Dark Shrine;Build Dark Shrine
+Dark Templar;Warp in Dark Templar
+Disruptor;Build Disruptor
+Extended Thermal Lance;Research Extended Thermal Lance
+Fleet Beacon;Build Fleet Beacon
+Forge;Build Forge
+Gateway;Build Gateway
+Gravitic Boosters;Research Gravitic Boosters
+Gravitic Drive;Research Gravitic Drive
+Graviton Catapult;Research Graviton Catapult
+Ground Armor Level 1;Research Ground Armor Level 1
+Ground Armor Level 2;Research Ground Armor Level 2
+Ground Armor Level 3;Research Ground Armor Level 3
+Ground Weapons Level 1;Research Ground Weapons Level 1
+Ground Weapons Level 2;Research Ground Weapons Level 2
+Ground Weapons Level 3;Research Ground Weapons Level 3
+High Templar;Warp in High Templar
+Immortal;Build Immortal
+Mothership Core;Build Mothership Core
+Mothership;Build Mothership
+Nexus;Build Nexus
+Observer;Build Observer
+Oracle;Build Oracle
+Phoenix;Build Phoenix
+Photon Cannon;Build Photon Cannon
+Pobes in Gas;Put Probes in Gas
+Probe;Build Probe
+Probes to Minerals;Put Probes back to Minerals
+Psionic Storm;Research Psionic Storm
+Pylon;Build Pylon
+Resonating Glaives;Research Resonating Glaives
 Return Probe
-Robotics Bay
-Robotics Facility
-Sentry
-Shields Level 1
-Shields Level 2
-Shields Level 3
-Stalker
-Stargate
-Tempest
-Templar Archives
-Twilight Council
-Void Ray
-Warp Gate
-Warp Gate Upgrade
-Warp Prism
-Warp in Dark Templar
-Warp in High Templar
-Warp in Sentry
-Warp in Stalker
-Warp in Zealot
-Zealot
+Robotics Bay;Build Robotics Bay
+Robotics Facility;Build Robotics FAcility
+Sentry;Warp in Sentry
+Shadow Stride;Research Shadow Stride
+Shields Level 1;Research Shields Level 1
+Shields Level 2;Research Shields Level 2
+Shields Level 3;Research Shields Level 3
+Stalker;Warp in Stalker
+Stargate;Build Stargate
+Tempest;Build Tempest
+Templar Archives;Build Templar Archives
+Transform to Gateway
+Transform to Warpgate
+Twilight Council;Build Twilight Council
+Void Ray;Build Void Ray
+Warp Gate;Research Warp Gate
+Warp Prism;Build Warp Prism
+Zealot;Warp in Zealot

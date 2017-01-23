@@ -1,73 +1,73 @@
-2 x Gas Drone
-2 x Mineral Drone
-3 x Gas Drone
-3 x Mineral Drone
-Adrenal Glands
-Baneling
-Baneling Nest
-Brood Lord
-Burrow
+1 x Drone in Gas;Put one Drone in Gas
+1 x Drone to Minerals;Put one Drone back to Minerals
+2 x Drones in Gas;Put two Drones in Gas
+2 x Drones to Minerals;Put two Drones back to Minerals
+3 x Drones in Gas;Put three Drones in Gas
+3 x Drones to Minerals;Put three Drones back to Minerals
+Adrenal Glands;Research Adrenal Glands
+Baneling Nest;Morph Baneling Nest
+Baneling;Morph Baneling
+Brood Lord;Morph Brood Lord
+Burrow;Research Burrow
 Cancel Extractor
-Centrifugal Hooks
-Chitinous Plating
-Corruptor
-Drone
-Enduring Locusts
-Evolution Chamber
-Extractor
-Flyer Attacks Level 1
-Flyer Attacks Level 2
-Flyer Attacks Level 3
-Flyer Carapace Level 1
-Flyer Carapace Level 2
-Flyer Carapace Level 3
-Gas Drone
-Glial Reconstitution
-Go out with Drone
-Greater Spire
-Grooved Spines
-Ground Carapace Level 1
-Ground Carapace Level 2
-Ground Carapace Level 3
-Hatchery
-Hatchery in Base
-Hive
-Hydralisk
-Hydralisk Den
-Infestation Pit
-Infestor
-Lair
-Melee Attacks Level 1
-Melee Attacks Level 2
-Melee Attacks Level 3
-Metabolic Boost
-Mineral Drone
-Missile Attacks Level 1
-Missile Attacks Level 2
-Missile Attacks Level 3
-Muscular Augments
-Mutalisk
-Neural Parasite
-Nydus Network
-Nydus Worm
-Overlord
-Overseer
-Pathogen Glands
-Pneumatized Carapace
-Queen
-Return Drone
-Roach
-Roach Warren
-Spawn Creep Tumor
-Spawn Larva
-Spawning Pool
-Spine Crawler
-Spire
-Spore Crawler
-Swarm Host
-Tunneling Claws
-Ultralisk
-Ultralisk Cavern
-Ventral Sacs
-Viper
-Zergling
+Centrifugal Hooks;Research Centrifugal Hooks
+Chitinous Plating;Research Chitinous Plating;
+Corruptor;Morph Corruptor
+Drone;Morph Drone
+Drones in Gas;Put Drones in Gas
+Drones to Minerals;Put Drones back to Minerals
+Evolution Chamber;Morph Evolution Chamber
+Extractor;Morph Extractor
+Flyer Attacks Level 1;Research Flyer Attacks Level 1
+Flyer Attacks Level 2;Research Flyer Attacks Level 2
+Flyer Attacks Level 3;Research Flyer Attacks Level 3
+Flyer Carapace Level 1;Research Flyer Carapace Level 1
+Flyer Carapace Level 2;Research Flyer Carapace Level 2
+Flyer Carapace Level 3;Research Flyer Carapace Level 3
+Glial Reconstitution;Research Glial Reconstitution
+Greater Spire;Morph Greater Spire
+Ground Carapace Level 1;Research Ground Carapace Level 1
+Ground Carapace Level 2;Research Ground Carapace Level 2
+Ground Carapace Level 3;Research Ground Carapace Level 3
+Hatchery;Morph Hatchery
+Hive;Morph Hive
+Hydralisk Den;Morph Hydralisk Den
+Hydralisk;Morph Hydralisk
+Infestation Pit;Morph Infestation Pit
+Infestor;Morph Infestor
+Lair;Morph Lair
+Lurker;Morph Lurker
+Macro Hatchery;Morph Macro Hatchery
+Melee Attacks Level 1;Research Melee Attacks Level 1
+Melee Attacks Level 2;Research Melee Attacks Level 2
+Melee Attacks Level 3;Research Melee Attacks Level 3
+Metabolic Boost;Research Metabolic Boost
+Missile Attacks Level 1;Research Missile Attacks Level 1
+Missile Attacks Level 2;Research Missile Attacks Level 2
+Missile Attacks Level 3;Research Missile Attacks Level 3
+Muscular Augments;Research Muscular Augments
+Mutalisk;Morph Mutalisk
+Mutate Ventral Sacs;Research Mutate Ventral Sacs
+Neural Parasite;Morph Neural Parasite
+Nydus Network;Morph Nydus Network
+Nydus Worm;Set Nydus Worm
+Overlord;Morph Overlord
+Overseer;Morph Overseer
+Pathogen Glands;Research Pathogen Glands
+Pneumatized Carapace;Research Pneumatized Carapace
+Queen;Morph Queen
+Ravager;Morph Ravager
+Roach Warren;Morph Roach Warren
+Roach;Morph Roach
+Spawn Creep Tumor;Research Spawn Creep Tumor
+Spawn Larva;Research Spawn Larva
+Spawning Pool;Morph Spawning Pool
+Spine Crawler;Morph Spine Crawler
+Spire;Morph Spire
+Spore Crawler;Morph Spore Crawler
+Swarm Host;Morph Swarm Host
+Tunneling Claws;Research Tunneling Claws
+Ultralisk Cavern;Morph Ultralisk Cavern
+Ultralisk;Morph Ultralisk
+Viper;Morph Viper
+Zergling;Morph Zergling
