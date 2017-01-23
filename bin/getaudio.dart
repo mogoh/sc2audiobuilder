@@ -1,6 +1,6 @@
 import 'dart:io';
 
-var filename = "zerg";
+var filename = "allorders.txt";
 
 //wget -q -U Mozilla -O output.mp3 "http://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=32&client=tw-ob&q=Well Played&tl=En-us"
 
@@ -15,23 +15,17 @@ main() async {
         } else {
             order = [line, line];
         }
-        
-        print(order[0]+"<br>");
-        
         order[0] = order[0].toLowerCase();
         order[0] = order[0].replaceAll(new RegExp(r"[-_.:\s]"), "");
         orders.add(order);
-        
-        
     }
-/*    
     for (List order in orders) {
         Process.run("wget",
             ["-q",
-             "-U Mozilla",
-             "-O "+order[0]+".mp3",
+             "-U", "Mozilla",
+             "-O", order[0]+".mp3",
              "http://translate.google.com/translate_tts?ie=UTF-8&total=1&idx=0&textlen=32&client=tw-ob&q="+order[1]+"&tl=En-us"
             ]);
         sleep(new Duration(milliseconds: 100));
-    }*/
+    }
 }
