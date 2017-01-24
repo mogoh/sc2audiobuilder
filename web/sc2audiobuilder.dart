@@ -12,33 +12,51 @@ TextAreaElement inputTextArea;
 bool inputClicked = false;
 
 void main() {
+    // Play/Pause-Button
     playPauseButton = querySelector("#playButton");
     playPauseButton.onClick.listen(start);
-    clock = querySelector("#clock");
-    outputTextArea = querySelector("#output");
+
+    // Reset Button
     querySelector("#resetButton").onClick.listen(reset);
+
+    // Clock
+    clock = querySelector("#clock");
+
+    // Input Text Area
     inputTextArea = querySelector("#input");
+    //This needs to be fixed.
     inputTextArea.onClick.listen(inputFirstClick);
+    
+    // Output textarea
+    outputTextArea = querySelector("#output");
 }
 
+/*
+ * The start function is invoced, when pressed play.
+ */
 void start(Event e) {
     if (!initialized) {
         playPauseButton.text = "Pause";
         parse();
         initialized = true;
-        run();
+        
+        //Start Timer
+        timer = new Timer.periodic(const Duration(seconds: 1), pulse);
+//        run();
     } else {
         if (timer.isActive) {
             playPauseButton.text = "Play";
             timer.cancel();
         } else {
             playPauseButton.text = "Pause";
-            timer = new Timer.periodic(const Duration(milliseconds: 768), pulse
-                    );
+            timer = new Timer.periodic(const Duration(seconds: 1), pulse);
         }
     }
 }
 
+/*
+ * The reset function resets all Timers back to zero.
+ */
 void reset(Event e) {
     if (timer != null) {
         timer.cancel();
@@ -58,6 +76,9 @@ void inputFirstClick(Event e) {
     }
 }
 
+/*
+ * Parse Input Function
+ */
 void parse() {
     TextAreaElement inputTA = querySelector("#input");
     String input = inputTA.value;
@@ -156,6 +177,9 @@ void parse() {
     }
 }
 
+/*
+ * Parse Time and Return Seconds
+ */
 int parseTime(String time) {
     List<String> stringTime = time.split(":");
     int minutes = int.parse(stringTime[0]);
@@ -163,9 +187,12 @@ int parseTime(String time) {
     return minutes * 60 + seconds;
 }
 
+/*
+Can probably be deleted
 void run() {
     timer = new Timer.periodic(const Duration(milliseconds: 720), pulse);
 }
+*/
 
 void pulse(Timer timer) {
     setTime();
@@ -193,6 +220,7 @@ void play(SC2Event sC2Event) {
 
     order = order.toLowerCase();
     order = order.replaceAll(new RegExp(r"[-_.:\s]"), "");
+    // TODO: Check if Order is even Available.
     new AudioElement("./sounds/" + order + ".mp3").play();
 
     if (sC2Event.times > 1 && sC2Event.times <= 24) {
@@ -207,12 +235,18 @@ void play(SC2Event sC2Event) {
     }
 }
 
+/*
+ * Print in Output Area.
+ */
 void println(String text) {
     outputTextArea.text += text + "\n";
     //  Scroll down
     outputTextArea.scrollTop = outputTextArea.scrollHeight;
 }
 
+/*
+ * Print Event
+ */
 void printEvent(SC2Event sC2Event) {
     String seconds = (sC2Event.time % 60).toString();
     if (seconds.length == 1) {
@@ -235,6 +269,9 @@ void printEvent(SC2Event sC2Event) {
     outputTextArea.scrollTop = outputTextArea.scrollHeight;
 }
 
+/*
+ * Update the Clock
+ */
 void setTime() {
     String seconds = (time % 60).toString();
     if (seconds.length == 1) {
